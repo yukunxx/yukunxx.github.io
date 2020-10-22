@@ -172,11 +172,32 @@
 
 
 
+<p>通用的<strong>增删改</strong>操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="comment">// 调用方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">&quot;update players set name=? where id=?&quot;</span>;</span><br><span class="line">    update(sql, <span class="string">&quot;Kobe&quot;</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通用的增删改操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String sql, Object ...args)</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    PreparedStatement ps = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">// 获取连接</span></span><br><span class="line">        conn = JDBCUtils.getConnection();</span><br><span class="line">        <span class="comment">// 预编译sql，返回实例</span></span><br><span class="line">        ps = conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 填充占位符</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">            ps.setObject(i+<span class="number">1</span>, args[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行</span></span><br><span class="line">        ps.execute();</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 关闭资源</span></span><br><span class="line">        JDBCUtils.closeResource(conn, ps);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>update( )中使用了<strong>可变参数</strong>作为<strong>占位符</strong> </p>
+<blockquote>
+<p>什么是可变参数？</p>
+</blockquote>
+<p>如果定义一个函数时确定了参数的类型，但<strong>个数不定</strong>，就可以使用可变参数。</p>
+<p>格式为 <strong>类型…参数名</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span>...arr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特殊写法（不确定参数的数据类型的情况下）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Object...arr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：</p>
+<ul>
+<li>一个方法的参数列表，只能有一个可变参数</li>
+<li>如果方法的参数有多个，那么可变参数必须写在参数列表的末尾</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgkyqhkj0001ssuj1woj2l38" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgl07vos00003cuj020i4z4h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgkyqhkm0003ssujdt9i58zo" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgl07vp800023cuj5kik24se" class="article-share-link">Share</a>
       
       
     </footer>
@@ -296,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgkyqhkb0000ssuj3jp07ca7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgl07vp500013cuj06wfezg0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -345,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgkyqhkl0002ssuj1l877wyf" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgl07vpg00033cuj85jvdha4" class="article-share-link">Share</a>
       
       
     </footer>

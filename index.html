@@ -241,7 +241,7 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取每个列的列名  (在循环中)</span></span><br><span class="line">String columnName = metaData.getColumnName(i + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
-<p>考虑到字段存在着<strong>别名</strong>的情况，所以获取列名一般用**<em>getColumnLabel( )**</em></p>
+<p>考虑到字段存在着<strong>别名</strong>的情况，所以获取列名一般用 <strong><em>getColumnLabel( )</em></strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取每个列的列名  (在循环中)</span></span><br><span class="line">String columnName = metaData.getColumnLabel(i + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
 

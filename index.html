@@ -212,15 +212,43 @@
 <p><strong><em>updateOne()</em></strong>     只修改<strong>一</strong>个符合条件的文档对象（第一个）</p>
 <p><strong><em>updateMany()</em></strong>  可修改<strong>多个</strong>符合条件的文档对象</p>
 <ul>
-<li>替换文档对象</li>
+<li>替换文档</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.replaceOne()</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除符合条件的所有文档（默认条件下删除多个）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collecion&gt;.remove() </span><br></pre></td></tr></table></figure>
+
+<p>如果<strong>第二个参数</strong>传递一个<strong>true</strong>，则只会<strong>删除一个</strong>。</p>
+<p>在 <strong><em>MongoDB 3.2</em></strong> 版本之后新增加了两个<strong>删除</strong>方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.deleteOne()</span><br><span class="line">db.&lt;collection&gt;.deleteMany()</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除集合</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.drop()</span><br></pre></td></tr></table></figure>
+
+<p>也可以用 <strong><em>remove()</em></strong> 但<strong>性能比较差</strong>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除数据库</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgs54qyg0000jguj3hn5ainj" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgs5urm3000238ujefdq5ey9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgs54qz30003jgujabv33ca3" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgs5urmc000438uj80bia943" class="article-share-link">Share</a>
       
       
     </footer>
@@ -621,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgs54qz40004jguj9i2x54d0" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgs5urm5000338ujcz6m0wi5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -657,7 +685,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgs54qyu0002jguj7gk4b58m" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgs5urls000038uj19j02012" class="article-share-link">Share</a>
       
       
     </footer>
@@ -706,7 +734,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgs54qyr0001jgujeroxc4gb" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgs5urm1000138ujhcwe9497" class="article-share-link">Share</a>
       
       
     </footer>

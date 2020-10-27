@@ -127,29 +127,100 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.insert(doc)   # &lt;collection&gt;指集合名，doc是文档</span><br></pre></td></tr></table></figure>
 
 <p>eg：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.insert(&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.students.insert(&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;)   # 插入一个文档对象</span><br><span class="line">db.students.insert([</span><br><span class="line">	&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;,</span><br><span class="line">	&#123;name:&quot;Curry&quot;,age:33,gender:&quot;male&quot;&#125;</span><br><span class="line">])    # 插入多个文档对象，以“数组”的形式</span><br></pre></td></tr></table></figure>
+
+<p>在 <strong><em>MongoDB 3.2</em></strong> 版本之后新增加了两个<strong>插入</strong>方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.insertOne()   # 插入一个文档对象</span><br><span class="line">db.&lt;collection&gt;.insertMany()  # 插入多个文档对象</span><br></pre></td></tr></table></figure>
 
 
 
 <ul>
-<li>查询当前集合中的所有文档</li>
+<li>查询当前集合中的<strong>所有</strong>文档 </li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find()   # &lt;collection&gt;指集合名</span><br></pre></td></tr></table></figure>
 
 <p>eg:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.find()</span><br></pre></td></tr></table></figure>
 
+<p><strong><em>find()</em></strong> 可以接收一个<strong>对象</strong>作为<strong>条件参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;字段名:值&#125;)  # 查询指定值的文档</span><br></pre></td></tr></table></figure>
+
+<p>eg：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.find(&#123;_id:&quot;001&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果我们没有写 <strong><em>_id</em></strong> 字段，系统会自动增添上 <strong><em>_id</em></strong> 字段，是一条记录的<strong>唯一标识</strong>。</p>
+<ul>
+<li>查询集合中符合条件的第一个文档（返回的是一个文档对象）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.findOne()   </span><br></pre></td></tr></table></figure>
+
+<p>等同于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find()[0]</span><br></pre></td></tr></table></figure>
+
+<p>由于 <strong><em>findOne()</em></strong> 返回的是一个<strong>文档对象</strong>，所以能直接访问属性：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.findOne(&#123;sex:&quot;male&quot;&#125;).name   # 访问name属性</span><br></pre></td></tr></table></figure>
 
 
 
+<ul>
+<li>查询返回结果的数量</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find().count()</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find().length()</span><br></pre></td></tr></table></figure>
 
 
+
+<ul>
+<li>修改数据</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.update(查询条件,新对象)</span><br></pre></td></tr></table></figure>
+
+<p>eg：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.update(&#123;name:&quot;James&quot;&#125;,&#123;age:31&#125;)    # 将name为James的对象的age属性改成31</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>默认情况下新对象会完全覆盖旧的对象，所以上述例子就变成了只有 {age:31} 这个对象了。</p>
+<ul>
+<li>修改指定条件的文档对象（需要使用<strong>修改操作符</strong> <strong>$set</strong>完成修改）  </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.update(</span><br><span class="line">	&#123;查询条件&#125;,</span><br><span class="line">	&#123;$set:&#123;要修改的属性&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>eg：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.students.update(</span><br><span class="line">	&#123;name:&quot;James&quot;&#125;,</span><br><span class="line">	&#123;$set:&#123;age:31&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除文档的指定属性（也属于修改）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.update(</span><br><span class="line">	&#123;查询条件&#125;,</span><br><span class="line">	&#123;$unset:&#123;要删除的属性&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>eg：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.students.update(</span><br><span class="line">	&#123;name:&quot;James&quot;&#125;,</span><br><span class="line">	&#123;$unset:&#123;age:31&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>修改<strong>多个</strong>符合条件的文档对象</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.update(</span><br><span class="line">	&#123;查询条件&#125;,</span><br><span class="line">	&#123;要修改的文档对象&#125;，</span><br><span class="line">	&#123;</span><br><span class="line">		upsert:&lt;boolean&gt;,</span><br><span class="line">		multi:&lt;boolean&gt;,    # 修改一个(false)或多个(true)符合条件的文档对象</span><br><span class="line">		writeConcern:&lt;document&gt;,</span><br><span class="line">		collation:&lt;document&gt;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：**<em>update()**</em>默认情况下只修改<strong>一个</strong>符合条件的文档对象（默认第一个）</p>
+<p><strong><em>updateOne()</em></strong>     只修改<strong>一</strong>个符合条件的文档对象（第一个）</p>
+<p><strong><em>updateMany()</em></strong>  可修改<strong>多个</strong>符合条件的文档对象</p>
+<ul>
+<li>替换文档对象</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.replaceOne()</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgrju1np0000vkujbmbf33fw" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgs54qyg0000jguj3hn5ainj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgrju1x90004vkuj19ps8l3w" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgs54qz30003jgujabv33ca3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -550,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgrju1o40001vkujdckv0s1b" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgs54qz40004jguj9i2x54d0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -586,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgrju1od0003vkujg46v8hhd" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgs54qyu0002jguj7gk4b58m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -635,7 +706,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgrju1o90002vkujf0hv742x" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgs54qyr0001jgujeroxc4gb" class="article-share-link">Share</a>
       
       
     </footer>

@@ -64,6 +64,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MongoDB笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2020-10-27T05:34:53.000Z" itemprop="datePublished">2020-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/">MongoDB笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>数据库（database）</li>
+<li>集合（collection）</li>
+<li>文档（document）</li>
+</ul>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><ul>
+<li>显示当前所有数据库（如果<strong>数据库中没有数据</strong>则不会显示）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>进入到指定的数据库（如果数据库不存在会<strong>自动创建</strong>）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use test      # test是数据库名称</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>表示当前所处的数据库</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>显示数据库中所有的集合</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作"></a>CRUD操作</h3><ul>
+<li>向数据库中插入文档</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.insert(doc)   # &lt;collection&gt;指集合名，doc是文档</span><br></pre></td></tr></table></figure>
+
+<p>eg：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.insert(&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>查询当前集合中的所有文档</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find()   # &lt;collection&gt;指集合名</span><br></pre></td></tr></table></figure>
+
+<p>eg:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.find()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgrju1np0000vkujbmbf33fw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/22/JDBC/" class="article-date">
@@ -371,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgoswgho0003ycuj1kat09ax" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgrju1x90004vkuj19ps8l3w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgoswghl0002ycuj3e2n4ibq" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgrju1o40001vkujdckv0s1b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -491,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgoswggt0000ycujbbqugppd" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgrju1od0003vkujg46v8hhd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -540,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgoswghh0001ycuj4ond41cz" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgrju1o90002vkujf0hv742x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,6 +674,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/">MongoDB笔记</a>
+          </li>
         
           <li>
             <a href="/2020/10/22/JDBC/">JDBC</a>

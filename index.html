@@ -150,6 +150,15 @@
 
 <p>如果我们没有写 <strong><em>_id</em></strong> 字段，系统会自动增添上 <strong><em>_id</em></strong> 字段，是一条记录的<strong>唯一标识</strong>。</p>
 <ul>
+<li>使用条件操作符的查询</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;k:v&#125;)    # 等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$gt:v&#125;&#125;)    # 大于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$gte:v&#125;&#125;&#125;)    # 大于等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$lt:v&#125;&#125;)    # 小于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$lte:v&#125;&#125;)    # 小于等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$ne:v&#125;&#125;)    # 不等于</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;k1:v1,k2:v2&#125;)    # 和(and)</span><br><span class="line">db.&lt;collection&gt;.find(&#123;$or:[&#123;k1:v1&#125;,&#123;k2:v2&#125;]&#125;)    # 或(or)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
 <li>查询集合中符合条件的第一个文档（返回的是一个文档对象）</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.findOne()   </span><br></pre></td></tr></table></figure>
@@ -248,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgs5urm3000238ujefdq5ey9" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgt2jhd90000c8ujf5zkf3c5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -565,7 +574,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgs5urmc000438uj80bia943" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgt2jhkv0004c8uje8wxgubr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -649,7 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgs5urm5000338ujcz6m0wi5" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgt2jhku0003c8ujcwlka7fd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -685,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgs5urls000038uj19j02012" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgt2jhdt0002c8ujcoecdye4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -734,7 +743,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgs5urm1000138ujhcwe9497" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgt2jhdm0001c8uj83y14a4e" class="article-share-link">Share</a>
       
       
     </footer>

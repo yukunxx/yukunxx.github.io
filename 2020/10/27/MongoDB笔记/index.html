@@ -15,7 +15,7 @@
 <meta property="og:description" content="基本概念 数据库（database） 集合（collection） 文档（document）  基本指令 显示当前所有数据库（如果数据库中没有数据则不会显示）  1show dbs  1show databases     进入到指定的数据库（如果数据库不存在会自动创建）  1use test      # test是数据库名称     表示当前所处的数据库  1db     显示数据库中所有的集">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-27T05:34:53.000Z">
-<meta property="article:modified_time" content="2020-10-27T16:04:26.102Z">
+<meta property="article:modified_time" content="2020-10-28T07:18:48.616Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -152,6 +152,15 @@
 
 <p>如果我们没有写 <strong><em>_id</em></strong> 字段，系统会自动增添上 <strong><em>_id</em></strong> 字段，是一条记录的<strong>唯一标识</strong>。</p>
 <ul>
+<li>使用条件操作符的查询</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;k:v&#125;)    # 等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$gt:v&#125;&#125;)    # 大于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$gte:v&#125;&#125;&#125;)    # 大于等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$lt:v&#125;&#125;)    # 小于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$lte:v&#125;&#125;)    # 小于等于</span><br><span class="line">db.&lt;collection&gt;.find(&#123;k:&#123;$ne:v&#125;&#125;)    # 不等于</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;k1:v1,k2:v2&#125;)    # 和(and)</span><br><span class="line">db.&lt;collection&gt;.find(&#123;$or:[&#123;k1:v1&#125;,&#123;k2:v2&#125;]&#125;)    # 或(or)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
 <li>查询集合中符合条件的第一个文档（返回的是一个文档对象）</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.findOne()   </span><br></pre></td></tr></table></figure>
@@ -250,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgs5urm3000238ujefdq5ey9" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgt2jhd90000c8ujf5zkf3c5" class="article-share-link">Share</a>
       
       
     </footer>

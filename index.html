@@ -92,7 +92,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckh1avpj80000p4ujek2sa0h6" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckh1ixg8t00002guj9y666pko" class="article-share-link">Share</a>
       
       
     </footer>
@@ -309,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckgz90g2u0000zouj9k9t8tgw" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckh1ixg9500022guj9pjychxu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -699,11 +699,62 @@
 
 
 
+<h4 id="Apache-DBUtils"><a href="#Apache-DBUtils" class="headerlink" title="Apache-DBUtils"></a>Apache-DBUtils</h4><p>使用Apache-DBUtils实现数据库的CRUD</p>
+<p>步骤：</p>
+<ul>
+<li>导入jar包：**<em>commons-dbutils-1.7.jar**</em></li>
+<li>编写代码</li>
+</ul>
+<hr>
+<p>使用的最重要的类：**<em>QueryRunner**</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line">QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p><strong>CRUD</strong></p>
+<ul>
+<li><strong><em>C、R、U</em></strong> 是使用 <strong><em>QueryRunner</em></strong> 类中的 <strong><em>update()</em></strong></li>
+<li><strong><em>D</em></strong> 是使用 <strong><em>QueryRunner</em></strong> 类中的 <strong><em>query()</em></strong></li>
+</ul>
+<hr>
+<p>insert操作示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn= <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 创建QueryRunner对象</span></span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        <span class="comment">// 获取连接</span></span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        <span class="comment">// 编写sql语句</span></span><br><span class="line">        String sql = <span class="string">&quot;insert into customers(user,balance) values(?,?)&quot;</span>;</span><br><span class="line">        <span class="comment">// 执行</span></span><br><span class="line">        runner.update(conn, sql, <span class="string">&quot;Yukun&quot;</span>, <span class="number">2000</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;插入成功&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBC.closeResource(conn, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查询的操作分为好几种：<strong>查询单条记录</strong>、<strong>查询多条记录</strong>、<strong>查询特殊值</strong></p>
+<ul>
+<li>在这里会使用到一个接口：**<em>ResultSetHandler&lt;T&gt;**</em>  ,但不是直接使用此接口，而是使用这个接口的<strong>实现类</strong>。</li>
+<li>查询单条记录可以使用 <strong><em>BeanHandler&lt;T&gt;</em></strong>、**<em>MapHandler&lt;T&gt;**</em>  等实现类</li>
+<li>查询多条记录可以使用  <strong><em>BeanListHandler&lt;T&gt;</em></strong>、**<em>MapListHandler&lt;T&gt;**</em> 等实现类，返回的是一个<strong>list集合</strong>。</li>
+<li>查询特殊值可以使用 <strong><em>ScalarHandler</em></strong></li>
+</ul>
+<hr>
+<p>查询单条记录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 BeanHandler</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        String sql = <span class="string">&quot;select user,balance from customers where user = ?&quot;</span>;</span><br><span class="line">        <span class="comment">// 这里要传一个class作为参数</span></span><br><span class="line">        BeanHandler&lt;Customers&gt; handler = <span class="keyword">new</span> BeanHandler&lt;Customers&gt;(Customers.class);</span><br><span class="line">        Customers customers = runner.query(conn, sql, handler, <span class="string">&quot;Yukun&quot;</span>);</span><br><span class="line">        System.out.println(customers);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBCUtils.closeResource(conn,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MapHandler  以map的形式输出</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        String sql = <span class="string">&quot;select user,balance from customers where user=?&quot;</span>;</span><br><span class="line">        MapHandler handler = <span class="keyword">new</span> MapHandler();</span><br><span class="line">        Map&lt;String, Object&gt; map = runner.query(conn, sql, handler, <span class="string">&quot;Yukun&quot;</span>);</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBCUtils.closeResource(conn,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查询多条记录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用BeanListHandler</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        String sql = <span class="string">&quot;select user,balance from customers&quot;</span>;</span><br><span class="line">        BeanListHandler&lt;Customers&gt; handler = <span class="keyword">new</span> BeanListHandler&lt;Customers&gt;(Customers.class);</span><br><span class="line">        List&lt;Customers&gt; list = runner.query(conn, sql, handler);</span><br><span class="line">        list.forEach(System.out::println);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBCUtils.closeResource(conn,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用MapListHandler</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        String sql = <span class="string">&quot;select user,balance from customers&quot;</span>;</span><br><span class="line">        MapListHandler handler = <span class="keyword">new</span> MapListHandler();</span><br><span class="line">        List&lt;Map&lt;String, Object&gt;&gt; mapList = runner.query(conn, sql, handler);</span><br><span class="line">        mapList.forEach(System.out::println);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBCUtils.closeResource(conn,<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查询特殊值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用ScalarHandler</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        QueryRunner runner = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        conn = JDBCUtils.getConnection1();</span><br><span class="line">        String sql = <span class="string">&quot;select count(*) from customers&quot;</span>;</span><br><span class="line">        ScalarHandler handler = <span class="keyword">new</span> ScalarHandler();</span><br><span class="line">        Long count = (Long) runner.query(conn, sql, handler);</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        JDBCUtils.closeResource(conn, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckgz90g3i0004zoujcg1vbbyr" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckh1ixg9u00052gujcfhphiz6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -787,7 +838,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckgz90g350003zouj4lvka6j1" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckh1ixg9700032gujfepyb36r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -823,7 +874,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckgz90g330002zoujeuxse3sk" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckh1ixg9900042gujeuo14f1x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -872,7 +923,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckgz90g310001zouj9c076957" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckh1ixg9200012gujcc9ias9y" class="article-share-link">Share</a>
       
       
     </footer>

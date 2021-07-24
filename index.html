@@ -86,7 +86,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="编写SpringMVC程序"><a href="#编写SpringMVC程序" class="headerlink" title="编写SpringMVC程序"></a>编写SpringMVC程序</h2><h4 id="编写SpringMVC程序（配置文件版）"><a href="#编写SpringMVC程序（配置文件版）" class="headerlink" title="编写SpringMVC程序（配置文件版）"></a>编写SpringMVC程序（配置文件版）</h4><p><strong>1、配置web.xml</strong></p>
+        <h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>经典MVC模式中，M是指业务模型，V是指用户界面，C则是控制器，使用MVC的目的是将M和V的实现代码分离，从而使同一个程序可以使用不同的表现形式。其中，View的定义比较清晰，就是用户界面。</p>
+<p>V：即View视图。是指用户看到并与之交互的界面。比如由html元素组成的网页界面，或者软件的客户端界面。MVC的好处之一在于它能为应用程序处理很多不同的视图。在视图中其实没有真正的处理发生，它只是作为一种输出数据并允许用户操作的方式。</p>
+<p>M：即model模型。是指模型表示业务规则。在MVC的三个部件中，模型拥有最多的处理任务。被模型返回的数据是中立的，模型与数据格式无关，这样一个模型能为多个视图提供数据，由于应用于模型的代码只需写一次就可以被多个视图重用，所以减少了代码的重复性。</p>
+<p>C：即controller控制器。是指控制器接受用户的输入并调用模型和视图去完成用户的需求，控制器本身不输出任何东西和做任何处理。它只是接收请求并决定调用哪个模型构件去处理请求，然后再确定用哪个视图来显示返回的数据。</p>
+<p>MVC是一种框架模式。最典型的MVC就是  <strong>JSP + Servlet + JavaBean</strong> 模式。</p>
+<p>MVC框架的任务：</p>
+<ol>
+<li>将url映射到java类或java类的方法 .</li>
+<li>封装用户提交的数据 .</li>
+<li>处理请求–&gt;调用相关的业务处理–&gt;封装响应数据 .</li>
+<li>将响应的数据进行渲染 . JSP /HTML 等视图层数据 .</li>
+</ol>
+<hr>
+<hr>
+<h2 id="编写SpringMVC程序"><a href="#编写SpringMVC程序" class="headerlink" title="编写SpringMVC程序"></a>编写SpringMVC程序</h2><h4 id="编写SpringMVC程序（配置文件版）"><a href="#编写SpringMVC程序（配置文件版）" class="headerlink" title="编写SpringMVC程序（配置文件版）"></a>编写SpringMVC程序（配置文件版）</h4><p><strong>1、配置web.xml</strong></p>
 <ul>
 <li>注册DispatchServlet</li>
 <li>关联SpringMVC配置文件（springmvc-servlet.xml）</li>
@@ -211,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="ckrgf5bbr0004jwuj0fftglm8" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="ckrhqlp690003owuj9y2eekf2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="ckrgf5bbq0003jwuj5fb1gjya" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="ckrhqlp6b0004owujdmpbaxuf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -373,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckrgf5bbg0000jwuj8j1rdld4" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckrhqlp610000owujgf6tei4i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -590,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckrgf5bbp0002jwujawy94q6c" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckrhqlp660001owuj05ue80wm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1051,7 +1065,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckrgf5bc80007jwuje7lq5m5d" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckrhqlp6s0007owujdz0x10b2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1135,7 +1149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckrgf5bbr0005jwuj7rj7egu8" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckrhqlp6c0005owujbllb4ld9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1171,7 +1185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckrgf5bbn0001jwujbp1fg0h3" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckrhqlp680002owuj26t3cepg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1220,7 +1234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckrgf5bbs0006jwuj2e7bccrx" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckrhqlp6m0006owujaosab6n2" class="article-share-link">Share</a>
       
       
     </footer>

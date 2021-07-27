@@ -271,7 +271,18 @@
 
 
 <h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h3><p>@RequestMapping用于映射url到控制器类或者一个方法。</p>
-<h3 id="RestFul风格"><a href="#RestFul风格" class="headerlink" title="RestFul风格"></a>RestFul风格</h3><h2 id="JSON交互处理"><a href="#JSON交互处理" class="headerlink" title="JSON交互处理"></a>JSON交互处理</h2><p>一些JSON数据解析工具</p>
+<h3 id="RestFul风格"><a href="#RestFul风格" class="headerlink" title="RestFul风格"></a>RestFul风格</h3><hr>
+<hr>
+<h3 id="结果跳转的方式"><a href="#结果跳转的方式" class="headerlink" title="结果跳转的方式"></a>结果跳转的方式</h3><hr>
+<hr>
+<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><h4 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h4><p>SpringMVC提供了过滤器来解决乱码的问题，可在web.xml中配置过滤器。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h2 id="JSON交互处理"><a href="#JSON交互处理" class="headerlink" title="JSON交互处理"></a>JSON交互处理</h2><p>一些JSON数据解析工具</p>
 <ul>
 <li>Jackson</li>
 <li>FastJson</li>
@@ -299,14 +310,9 @@
 
 <p><strong>@RestController</strong></p>
 <ul>
-<li>使用@RestController之后，里面所有的方法都只会返回json字符串</li>
 <li>@RestController 就相当于 @Controller 和 @ResponseBody</li>
+<li>使用了@ResponseBody注解之后不走视图解析器，直接返回字符串。</li>
 </ul>
-<p>对象输出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/j1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个jackson的对象映射器</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        <span class="comment">// 创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">&quot;毓堃&quot;</span>, <span class="number">21</span>, <span class="string">&quot;男&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将我们的对象解析成为JSON格式</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line">        <span class="comment">// 由于@ResposeBody注解，这里会将str转化为JSON格式返回。</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>集合输出：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/j1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个jackson的对象映射器</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">        </span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;毓堃&quot;</span>, <span class="number">21</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;毓堃&quot;</span>, <span class="number">22</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;毓堃&quot;</span>, <span class="number">23</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;毓堃&quot;</span>, <span class="number">24</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -315,11 +321,47 @@
 <p>时间输出：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/j1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个jackson的对象映射器</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>注意：这里的时间会以<strong>时间戳</strong>的形式返回。（Jackson默认）</p>
+<p>自定义格式返回时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/j1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个jackson的对象映射器</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        <span class="comment">// 不使用时间戳的方式</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, <span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// 自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">        <span class="comment">// 指定日期格式</span></span><br><span class="line">        mapper.setDateFormat(sdf);</span><br><span class="line"></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为了方便使用，可将代码封装到工具类中，编写一个JsonUtils类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果没有自定义格式，则以默认的格式返回</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getJson</span><span class="params">(Object object)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getJson(object,<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getJson</span><span class="params">(Object object, String dateFormat)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个jackson的对象映射器</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        <span class="comment">// 不使用时间戳的方式</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, <span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// 自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(dateFormat);</span><br><span class="line">        <span class="comment">// 指定日期格式</span></span><br><span class="line">        mapper.setDateFormat(sdf);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mapper.writeValueAsString(object);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (JsonProcessingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用JsonUtils工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/j1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        String json = JsonUtils.getJson(date);</span><br><span class="line">        <span class="keyword">return</span> json;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="FastJson的使用"><a href="#FastJson的使用" class="headerlink" title="FastJson的使用"></a>FastJson的使用</h4><ul>
+<li>导入依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/fastjson --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.75<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>编写代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yukun.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.yukun.pojo.User;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastJsonDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;Tom&quot;</span>, <span class="number">1</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;Tom&quot;</span>, <span class="number">2</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> User(<span class="string">&quot;Tom&quot;</span>, <span class="number">3</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Java对象转JSON字符串</span></span><br><span class="line">        String str1 = JSON.toJSONString(list);</span><br><span class="line">        System.out.println(str1);</span><br><span class="line">        </span><br><span class="line">        String str2 = JSON.toJSONString(<span class="keyword">new</span> User(<span class="string">&quot;Tom&quot;</span>, <span class="number">1</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        System.out.println(str2);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// JSON字符串转Java对象</span></span><br><span class="line">        User user = JSON.parseObject(str2, User.class);</span><br><span class="line">        System.out.println(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Java对象转JSON对象</span></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(<span class="keyword">new</span> User(<span class="string">&quot;Tom&quot;</span>, <span class="number">1</span>, <span class="string">&quot;男&quot;</span>));</span><br><span class="line">        System.out.println(jsonObject);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// JSON对象转为Java对象</span></span><br><span class="line">        User user1 = JSON.toJavaObject(jsonObject, User.class);</span><br><span class="line">        System.out.println(user1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>JSON.toJSONString(obj)：Java对象转JSON字符串。</li>
+<li>JSON.parseObject()：JSON字符串转Java对象。</li>
+<li>JSON.toJSON(obj)：Java对象转JSON对象。</li>
+<li>JSON.toJavaObject()：JSON对象转为Java对象。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="ckrj723px00062sujfjp2h3ks" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="ckrln2pgq0006k8uj7ka7b31q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="ckrj723pk00032sujejmlgyn2" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="ckrln2pgh0003k8uj6fikdq75" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckrj723pb00002sujhoy495x7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="ckrln2pg90000k8uj0hdta6y4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -698,7 +740,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckrj723ph00012suj5j7bawj4" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="ckrln2pge0001k8uj7hplhwok" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1159,7 +1201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckrj723q000072suj6lx67j0k" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="ckrln2pgx0007k8ujb8xa55qd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1243,7 +1285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckrj723pn00052suj2lnx01a7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="ckrln2pgi0004k8ujf9ia34ed" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1279,7 +1321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckrj723pj00022suj1ztvexj3" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/My-First-Blog/" data-id="ckrln2pgg0002k8uj2xkk9toh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1328,7 +1370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckrj723pm00042suj5nx6g460" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/16/hello-world/" data-id="ckrln2pgk0005k8uj8mut2atf" class="article-share-link">Share</a>
       
       
     </footer>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Redis | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Redis Redis是远程字典服务器 由C语言编写，Key-Value数据库，基于内存 分布式缓存、内存存储以及持久化、高可用架构、（缓存穿透、击穿、雪崩）、分布式锁、队列….   Linux上安装gcc环境 1yum -y install gcc-c++  查看gcc版本 1gcc -v  解压redis压缩包 1tar -zxvf redis-7.0.11.tar.gz  解压完后进入到re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://example.com/2023/05/05/Redis/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Redis Redis是远程字典服务器 由C语言编写，Key-Value数据库，基于内存 分布式缓存、内存存储以及持久化、高可用架构、（缓存穿透、击穿、雪崩）、分布式锁、队列….   Linux上安装gcc环境 1yum -y install gcc-c++  查看gcc版本 1gcc -v  解压redis压缩包 1tar -zxvf redis-7.0.11.tar.gz  解压完后进入到re">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-05T09:31:22.000Z">
+<meta property="article:modified_time" content="2023-08-13T09:37:19.473Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="中间件">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/05/05/Redis/" class="article-date">
+  <time datetime="2023-05-05T09:31:22.000Z" itemprop="datePublished">2023-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><ul>
+<li>Redis是远程字典服务器</li>
+<li>由C语言编写，Key-Value数据库，基于内存</li>
+<li>分布式缓存、内存存储以及持久化、高可用架构、（缓存穿透、击穿、雪崩）、分布式锁、队列….</li>
+</ul>
+<hr>
+<h3 id="Linux上安装"><a href="#Linux上安装" class="headerlink" title="Linux上安装"></a>Linux上安装</h3><p>gcc环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>查看gcc版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -v</span><br></pre></td></tr></table></figure>
+
+<p>解压redis压缩包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf redis-7.0.11.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压完后进入到redis目录，编译安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>默认安装到目录 <code>/usr/local/bin</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark  <span class="comment"># 性能测试工具</span></span><br><span class="line">redis-check-aof  <span class="comment"># 修复AOF文件</span></span><br><span class="line">redis-check-rdb  <span class="comment"># 修复dump.rdb文件</span></span><br><span class="line">redis-cli        <span class="comment"># 客户端</span></span><br><span class="line">redis-sentinel   <span class="comment"># redis集群使用</span></span><br><span class="line">redis-server     <span class="comment"># redis服务器启动命令</span></span><br></pre></td></tr></table></figure>
+
+<p>拷贝一份redis.conf配置文件，修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">daemonize no 改成 daenonize yes</span><br><span class="line">protected-mode yes 改成 protected-mode no</span><br><span class="line">注释 <span class="built_in">bind</span> 127.0.0.1</span><br><span class="line">requirepass 设置自己的密码</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启动服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /myredis/redis7.conf</span><br></pre></td></tr></table></figure>
+
+<p>连接服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a 密码 -p 6379</span><br></pre></td></tr></table></figure>
+
+<p>关闭服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a 密码 shutdown</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="key操作命令"><a href="#key操作命令" class="headerlink" title="key操作命令"></a>key操作命令</h3><ul>
+<li><code>keys *</code>：查找所有的key</li>
+<li><code>type key</code>  ：查看key的类型</li>
+<li><code>del key</code>：删除key（阻塞）</li>
+<li><code>unlink key</code>：删除key(非阻塞)</li>
+<li><code>ttl key</code>：查看key的过期时间 （-1：永不过期  -2：已过期）</li>
+<li><code>expire key 秒</code>：设置key的过期时间</li>
+<li><code>move key dbindex[0-15]</code>：移动key到指定数据库</li>
+<li><code>select dbindex</code>：切换数据库   [0-15] 默认16个数据库</li>
+<li><code>dbsize</code>：查看当前数据库key的数量</li>
+<li><code>flushdb</code>：清空当前库</li>
+<li><code>flushall</code>：清除全部库</li>
+</ul>
+<h3 id="数据类型（10种）"><a href="#数据类型（10种）" class="headerlink" title="数据类型（10种）"></a>数据类型（10种）</h3><h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>基本语法：<code>set key value</code></p>
+<p>（1）参数：</p>
+<ul>
+<li><p>nx：没有则添加</p>
+</li>
+<li><p>xx：有则添加</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1 nx</span><br><span class="line"><span class="built_in">set</span> k1 v1 xx   <span class="comment"># 再次执行新值会把旧值覆盖</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>get：弹出旧值</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1          <span class="comment"># 假设这是第一次设置</span></span><br><span class="line"><span class="built_in">set</span> k1 v1xx get    <span class="comment"># 得到的值是：v1（旧值）</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ex：过期时间（秒）</li>
+<li>px：过期时间（毫秒）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1 ex 5  <span class="comment"># 和setex k1 5 v1</span></span><br><span class="line"><span class="built_in">set</span> k1 v1 px 5000  <span class="comment"># 等价与上面的语句</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>exat：过期时间（UNIX时间戳）（秒）</li>
+<li>pxat：过期时间（UNIX时间戳）（毫秒）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<ul>
+<li><code>keepttl</code>：保存过期时间</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1 ex 30  </span><br><span class="line"><span class="built_in">set</span> k1 v1xx   <span class="comment"># 更改k1的值</span></span><br><span class="line">ttl k1        <span class="comment"># 此时的过期时间直接变成：-1</span></span><br></pre></td></tr></table></figure>
+
+<p>显然k1的过期时间没有被保存，直接失效了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set k1 v1 ex 30     </span><br><span class="line">set k1 v1xx keepttl   # 更改k1的值，并保存k1的过期时间</span><br><span class="line">ttl k1                # 此时有过期时间</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）同时设置、获取多个键值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mset k1 v1 k2 v2 k3 v3  # 同时设置 </span><br><span class="line">mget k1 k2 k3           # 同时获取</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msetnx k1 v1 k4 v4  <span class="comment"># 不会执行成功，因为存在k1了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）获取指定区间范围内的值</p>
+<ul>
+<li>getrange</li>
+<li>setrange</li>
+</ul>
+<p>（4）数值增减</p>
+<ul>
+<li>incr</li>
+<li>decr</li>
+<li>incrby</li>
+<li>decrby</li>
+</ul>
+<p>（5）获取字符串长度和内容追加</p>
+<ul>
+<li>strlen</li>
+<li>append </li>
+</ul>
+<p>（6）分布式锁</p>
+<ul>
+<li>setnx</li>
+<li>setex</li>
+</ul>
+<p>（7）getset</p>
+<p>（8）应用场景</p>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><ul>
+<li>lpush：从左往右依次插入数据到列表</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LPUSH list1 1 2 3 4 5   <span class="comment"># 此时列表为 5 4 3 2 1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>rpush</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RPUSH list1 1 2 3 4 5   <span class="comment"># 列表为 1 2 3 4 5</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>lrange</li>
+<li>lpop</li>
+<li>rpop</li>
+<li>llen</li>
+<li>lindex</li>
+<li>lrem</li>
+<li>ltrim</li>
+<li>rpoplpush</li>
+<li>lset</li>
+<li>linsert</li>
+<li>应用场景</li>
+</ul>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><p>kv键值对，v是一个键值对，相当于Java中的 <code>Map&lt;String,Map&lt;Object,Object&gt;&gt;</code></p>
+<ul>
+<li>hset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HSET k1 a 1 b 2 c 3   <span class="comment"># 即 k1:&#123;a:1,b:2,c:3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hget</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HGET k1 a    <span class="comment"># 得到的值为 1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hmset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMSET k1 a 1 b 2 c 3   <span class="comment"># 和HSET一致</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hmget</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMGET k1 a b c   <span class="comment"># 得到的值为1  2  3</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hgetall</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HGETALL k1   <span class="comment"># 得到所有键值对</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hdel</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDEL k1 c   <span class="comment"># 删除k1中c这个键值对</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hlen</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HLEN k1  <span class="comment"># 获取k1的键值对数量</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hexists</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXISTS k1 a  <span class="comment"># 查询k1中的键值对的键为a的键值对是否存在</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hkeys</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEYS k1  <span class="comment"># 获取k1中所有键值对的键</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hvals</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HVALS k1 <span class="comment"># 获取k1中所有键值对的值</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hsetnx</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HSETNX k1 a 1   <span class="comment">#存在则无效，不存在则添加</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><ul>
+<li>sadd</li>
+<li>smembers</li>
+<li>sismember</li>
+<li>srem</li>
+<li>scard</li>
+<li>srandmember</li>
+<li>spop</li>
+<li>smove</li>
+<li>集合运算<ul>
+<li>差集：sdiff</li>
+<li>并集：sunion</li>
+<li>交集：sinter、<code>sintercard</code>（Redis7新增命令）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/05/05/Redis/" data-id="cll99mzem00051gdi75zzdbzq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/13/RocketMQ/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RocketMQ
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/01/Spring/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Journals/" rel="tag">Journals</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Journals/" style="font-size: 10px;">Journals</a> <a href="/tags/SSM/" style="font-size: 20px;">SSM</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 15px;">中间件</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/13/RocketMQ/">RocketMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/05/Redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/01/Spring/">Spring</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/27/SSM%E6%95%B4%E5%90%88/">SSM整合</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/23/SpringMVC/">SpringMVC</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

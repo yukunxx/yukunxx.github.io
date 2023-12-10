@@ -1,9 +1,8 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  
-
   
   <title>MongoDB笔记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,23 +19,21 @@
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.2.0"></head>
-
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
+<div id="container">
+  <div id="wrap">
+    <header id="header">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
@@ -61,13 +58,20 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="example.com">
+        </form>
       </div>
     </div>
   </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-MongoDB笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="outer">
+      <section id="main"><article id="post-MongoDB笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" class="article-date">
   <time datetime="2020-10-27T05:34:53.000Z" itemprop="datePublished">2020-10-27</time>
@@ -146,26 +150,26 @@
 <p>eg：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.students.insert(&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;)   # 插入一个文档对象</span><br><span class="line">db.students.insert([</span><br><span class="line">	&#123;name:&quot;James&quot;,age:36,gender:&quot;male&quot;&#125;,</span><br><span class="line">	&#123;name:&quot;Curry&quot;,age:33,gender:&quot;male&quot;&#125;</span><br><span class="line">])    # 插入多个文档对象，以“数组”的形式</span><br></pre></td></tr></table></figure>
 
-<p>在 <strong><em>MongoDB 3.2</em></strong> 版本之后新增加了两个<strong>插入</strong>方法：</p>
+<p>在 <em><strong>MongoDB 3.2</strong></em> 版本之后新增加了两个<strong>插入</strong>方法：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.insertOne()   # 插入一个文档对象</span><br><span class="line">db.&lt;collection&gt;.insertMany()  # 插入多个文档对象</span><br></pre></td></tr></table></figure>
 
 
 
 <ul>
-<li>查询当前集合中的<strong>所有</strong>文档 </li>
+<li>查询当前集合中的<strong>所有</strong>文档</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find()   # &lt;collection&gt;指集合名</span><br></pre></td></tr></table></figure>
 
 <p>eg:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.find()</span><br></pre></td></tr></table></figure>
 
-<p><strong><em>find()</em></strong> 可以接收一个<strong>对象</strong>作为<strong>条件参数</strong></p>
+<p><em><strong>find()</strong></em> 可以接收一个<strong>对象</strong>作为<strong>条件参数</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find(&#123;字段名:值&#125;)  # 查询指定值的文档</span><br></pre></td></tr></table></figure>
 
 <p>eg：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.find(&#123;_id:&quot;001&quot;&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>如果我们没有写 <strong><em>_id</em></strong> 字段，系统会自动增添上 <strong><em>_id</em></strong> 字段，是一条记录的<strong>唯一标识</strong>。</p>
+<p>如果我们没有写 <em><strong>_id</strong></em> 字段，系统会自动增添上 <em><strong>_id</strong></em> 字段，是一条记录的<strong>唯一标识</strong>。</p>
 <ul>
 <li>使用条件操作符的查询</li>
 </ul>
@@ -183,7 +187,7 @@
 <p>等同于：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.find()[0]</span><br></pre></td></tr></table></figure>
 
-<p>由于 <strong><em>findOne()</em></strong> 返回的是一个<strong>文档对象</strong>，所以能直接访问属性：</p>
+<p>由于 <em><strong>findOne()</strong></em> 返回的是一个<strong>文档对象</strong>，所以能直接访问属性：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.students.findOne(&#123;sex:&quot;male&quot;&#125;).name   # 访问name属性</span><br></pre></td></tr></table></figure>
 
 
@@ -208,7 +212,7 @@
 
 <p><strong>注意：</strong>默认情况下新对象会完全覆盖旧的对象，所以上述例子就变成了只有 {age:31} 这个对象了。</p>
 <ul>
-<li>修改指定条件的文档对象（需要使用<strong>修改操作符</strong> <strong>$set</strong>完成修改）  </li>
+<li>修改指定条件的文档对象（需要使用<strong>修改操作符</strong> <strong>$set</strong>完成修改）</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.update(</span><br><span class="line">	&#123;查询条件&#125;,</span><br><span class="line">	&#123;$set:&#123;要修改的属性&#125;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
@@ -234,9 +238,9 @@
 
 
 
-<p>注意：**<em>update()**</em>默认情况下只修改<strong>一个</strong>符合条件的文档对象（默认第一个）</p>
-<p><strong><em>updateOne()</em></strong>     只修改<strong>一</strong>个符合条件的文档对象（第一个）</p>
-<p><strong><em>updateMany()</em></strong>  可修改<strong>多个</strong>符合条件的文档对象</p>
+<p>注意：***update()<em><strong>默认情况下只修改</strong>一个</em>*符合条件的文档对象（默认第一个）</p>
+<p><em><strong>updateOne()</strong></em>     只修改<strong>一</strong>个符合条件的文档对象（第一个）</p>
+<p><em><strong>updateMany()</strong></em>  可修改<strong>多个</strong>符合条件的文档对象</p>
 <ul>
 <li>替换文档</li>
 </ul>
@@ -250,7 +254,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collecion&gt;.remove() </span><br></pre></td></tr></table></figure>
 
 <p>如果<strong>第二个参数</strong>传递一个<strong>true</strong>，则只会<strong>删除一个</strong>。</p>
-<p>在 <strong><em>MongoDB 3.2</em></strong> 版本之后新增加了两个<strong>删除</strong>方法：</p>
+<p>在 <em><strong>MongoDB 3.2</strong></em> 版本之后新增加了两个<strong>删除</strong>方法：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.deleteOne()</span><br><span class="line">db.&lt;collection&gt;.deleteMany()</span><br></pre></td></tr></table></figure>
 
 
@@ -260,7 +264,7 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.drop()</span><br></pre></td></tr></table></figure>
 
-<p>也可以用 <strong><em>remove()</em></strong> 但<strong>性能比较差</strong>。</p>
+<p>也可以用 <em><strong>remove()</strong></em> 但<strong>性能比较差</strong>。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.&lt;collection&gt;.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
 
 
@@ -274,8 +278,14 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="clpzo2r9z0004codidq3jaf5b" class="article-share-link">Share</a>
       
+        <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="clpzpvi6c0004dgdighgn58ih" class="article-share-link" data-share="baidu" data-title="MongoDB笔记">Share</a>
+      
+
+      
+        <a href="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/#ds-thread" class="article-comment-link">Comments</a>
+      
+
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
 
@@ -305,21 +315,23 @@
   
 </article>
 
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2020/10/27/MongoDB笔记/" data-title="MongoDB笔记" data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/"></div>
+  </section>
 </section>
-        
-          <aside id="sidebar">
+      
+      <aside id="sidebar">
   
     
-
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Journals/" rel="tag">Journals</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Journals/" rel="tag">Journals</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
-
 
   
     
@@ -335,10 +347,9 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
-
 
   
     
@@ -372,36 +383,103 @@
   </div>
 
   
-</aside>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
         
-      </div>
-      <footer id="footer">
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
   
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2023 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
+  </div>
+  <nav id="mobile-nav">
   
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
 </nav>
-    
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"reqianduan"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
 
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<!-- 百度分享 start -->
 
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 
 
@@ -409,8 +487,6 @@
 <script src="/js/script.js"></script>
 
 
-
-
-  </div>
+</div>
 </body>
 </html>

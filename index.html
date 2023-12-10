@@ -64,6 +64,160 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/12/10/Git/" class="article-date">
+  <time datetime="2023-12-10T15:26:42.000Z" itemprop="datePublished">2023-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/10/Git/">Git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-配置基本信息"><a href="#1-配置基本信息" class="headerlink" title="1.配置基本信息"></a>1.配置基本信息</h3><p><img src="../images%5Cimage-20231210160705582.png" alt="image-20231210160705582"></p>
+<p>配置用户名和邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;xxxx&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;1078866902@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2-创建git仓库"><a href="#2-创建git仓库" class="headerlink" title="2.创建git仓库"></a>2.创建git仓库</h3><p><img src="../images/image-20231210161449573.png" alt="image-20231210161449573"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="3-工作区域"><a href="#3-工作区域" class="headerlink" title="3.工作区域"></a>3.工作区域</h3><ul>
+<li>工作区</li>
+<li>暂存区</li>
+<li>本地仓库</li>
+</ul>
+<h3 id="4-状态"><a href="#4-状态" class="headerlink" title="4.状态"></a>4.状态</h3><ul>
+<li>未跟踪</li>
+<li>未修改</li>
+<li>已修改</li>
+<li>已暂存</li>
+</ul>
+<p>新创建一个文件，状态为 <code>Untracked</code></p>
+<p><img src="../images/image-20231210165602821.png" alt="image-20231210165602821"></p>
+<p>将文件从工作区移动至暂存区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add demo.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210165824111.png" alt="image-20231210165824111"></p>
+<p>将暂存区中的文件拿出来，此时文件变成<code>Untrack</code>状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached demo.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210170026974.png" alt="image-20231210170026974"></p>
+<p>提交到本地仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息....&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="../images/image-20231210170317041.png" alt="image-20231210170317041"></p>
+<blockquote>
+<p>本次提交后，暂存区的内容不会被清空，直至下一次提交。</p>
+</blockquote>
+<p>查看提交记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210171005399.png" alt="image-20231210171005399"></p>
+<p>查看提交记录（简易版），只需要加上参数 <code>--oneline</code></p>
+<p><img src="../images/image-20231210171148367.png" alt="image-20231210171148367"></p>
+<h3 id="5-版本回退"><a href="#5-版本回退" class="headerlink" title="5.版本回退"></a>5.版本回退</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset</span><br></pre></td></tr></table></figure>
+
+<p>三种模式</p>
+<ul>
+<li><p><code>--soft</code> 保留工作区和暂存区的所有修改内容</p>
+</li>
+<li><p><code>--hard</code> 丢弃工作区和暂存区的修改内容</p>
+</li>
+<li><p><code>--mined</code> 保留工作区修改内容，丢弃暂存区修改内容 （默认模式）</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft</span><br><span class="line">git reset --hard</span><br><span class="line">git reset --mixed</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="（1）soft"><a href="#（1）soft" class="headerlink" title="（1）soft"></a>（1）soft</h4><p>当前版本</p>
+<p><img src="../images/image-20231210202001684.png" alt="image-20231210202001684"></p>
+<p>回退到指定版本</p>
+<p><img src="../images/image-20231210202155176.png" alt="image-20231210202155176"></p>
+<p>工作区与暂存区的文件保留</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git ls-files     <span class="comment">#查看暂存区文件信息</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210202316711.png" alt="image-20231210202316711"></p>
+<p>此时的<code>demo3.txt</code>文件处于未提交的状态，可根据实际情况修改并重新提交到暂存区</p>
+<p><img src="../images/image-20231210202519320.png" alt="image-20231210202519320"></p>
+<h4 id="（2）hard"><a href="#（2）hard" class="headerlink" title="（2）hard"></a>（2）hard</h4><p><img src="../images/image-20231210202913287.png" alt="image-20231210202913287"></p>
+<h4 id="（3）mixed"><a href="#（3）mixed" class="headerlink" title="（3）mixed"></a>（3）mixed</h4><p>此时暂存区的文件被删除，工作区的文件保留，且处于<code>Untracked</code>状态</p>
+<p><img src="../images/image-20231210203146350.png" alt="image-20231210203146350"></p>
+<p>查看历史操作记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p>恢复到指定版本号</p>
+<p><img src="../images/image-20231210204020576.png" alt="image-20231210204020576"></p>
+<blockquote>
+<p>适用于对误删或者其他操作的恢复</p>
+</blockquote>
+<h3 id="6-差异查看"><a href="#6-差异查看" class="headerlink" title="6.差异查看"></a>6.差异查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
+<p>默认查看工作区与暂存区之间的差异</p>
+<p><img src="../images/image-20231210205339591.png" alt="image-20231210205339591"></p>
+<p>查看工作区与本地仓库之间的差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210205500333.png" alt="image-20231210205500333"></p>
+<p>执行提交后，差异就不存在了</p>
+<p><img src="../images/image-20231210205659377.png" alt="image-20231210205659377"></p>
+<p>查看暂存区与本地仓库之间的差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看不同版本之间的差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 版本号1 版本号2</span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210210043388.png" alt="image-20231210210043388"></p>
+<p>查看当前版本和上一版本的差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD~ HEAD</span><br></pre></td></tr></table></figure>
+
+<p><img src="../images/image-20231210210403160.png" alt="image-20231210210403160"></p>
+<p><code>HEAD~</code> 表示上一个版本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/12/10/Git/" data-id="clpzncgor0001isdi5s1debqh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-RocketMQ" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/08/13/RocketMQ/" class="article-date">
@@ -170,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/13/RocketMQ/" data-id="cll9bh8lj0008rsdihexp0yhf" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/08/13/RocketMQ/" data-id="clpzncgp60009isdi1azteiew" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li></ul>
@@ -434,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/05/Redis/" data-id="cll9bh8lg0005rsdi3aifb2pq" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/05/05/Redis/" data-id="clpzncgp50008isdiaqqscryv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li></ul>
@@ -698,7 +852,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/01/Spring/" data-id="cll9bh8m3000krsdi5jdn6yp0" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/05/01/Spring/" data-id="clpzncgpx000nisdiaj7694em" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
@@ -867,7 +1021,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/27/SSM%E6%95%B4%E5%90%88/" data-id="cll9bh8m1000irsdibg5ydxlz" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/27/SSM%E6%95%B4%E5%90%88/" data-id="clpzncgpm000lisdiagu767fh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
@@ -1176,7 +1330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="cll9bh8m5000mrsdi63sa527m" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/SpringMVC/" data-id="clpzncgpy000pisdi7wes0f02" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
@@ -1302,7 +1456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="cll9bh8lf0004rsdi24949wuq" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/23/MyBaits%E7%AC%94%E8%AE%B0/" data-id="clpzncgp30005isdi0i983f7s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
@@ -1342,7 +1496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="cll9bh8l20000rsdi88lv3qld" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/03/11%E6%9C%88/" data-id="clpzncgol0000isdi421g6xg3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Journals/" rel="tag">Journals</a></li></ul>
@@ -1561,7 +1715,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="cll9bh8l90001rsdi58tc7jto" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/27/MongoDB%E7%AC%94%E8%AE%B0/" data-id="clpzncgp00003isdihdg5h5wh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
@@ -2024,96 +2178,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="cll9bh8mi000qrsdig2625k1v" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/22/JDBC/" data-id="clpzncgqg000tisdi0ygd54p2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-搭建个人博客（Hexo）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" class="article-date">
-  <time datetime="2020-10-16T12:12:24.000Z" itemprop="datePublished">2020-10-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/">搭建个人博客（Hexo）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 下载node.js</strong></p>
-<p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
-<p><strong>2.使用npm安装cnpm</strong>（镜像源指向淘宝）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>3.使用cnpm全局安装hexo</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后可查看hexo版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>4.创建blog文件夹</strong>（可使用命令行创建）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir blog</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>5.使用hexo生成博客</strong>（初始化一个博客，在管理员权限下）</p>
-<p>在 <strong><em>blog</em></strong> 文件夹下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>6.启动博客</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>7.生成新的博客文章</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;My First Blog&quot;</span><br></pre></td></tr></table></figure>
-
-<p>会在 <strong><em>/blog/source/_posts/</em></strong> 下生成新的 <strong><em>.md</em></strong> 文件</p>
-<p>清除<strong>缓存文件 db.json</strong> 和 <strong>已生成的静态文件 public</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
-
-
-<p>重新生成<strong>静态文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong>更多的Hexo指令：</strong><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands.html">https://hexo.io/zh-cn/docs/commands.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88Hexo%EF%BC%89/" data-id="cll9bh8lz000hrsdia4660thc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li></ul>
 
     </footer>
   </div>
@@ -2140,7 +2208,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Journals/" rel="tag">Journals</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Journals/" rel="tag">Journals</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
     </div>
   </div>
 
@@ -2150,7 +2218,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Journals/" style="font-size: 10px;">Journals</a> <a href="/tags/SSM/" style="font-size: 20px;">SSM</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 15px;">中间件</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a>
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Journals/" style="font-size: 10px;">Journals</a> <a href="/tags/SSM/" style="font-size: 20px;">SSM</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 15px;">中间件</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a>
     </div>
   </div>
 
@@ -2159,7 +2227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
     </div>
   </div>
 
@@ -2170,6 +2238,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/12/10/Git/">Git</a>
+          </li>
         
           <li>
             <a href="/2023/08/13/RocketMQ/">RocketMQ</a>
@@ -2185,10 +2257,6 @@
         
           <li>
             <a href="/2021/07/27/SSM%E6%95%B4%E5%90%88/">SSM整合</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/23/SpringMVC/">SpringMVC</a>
           </li>
         
       </ul>
